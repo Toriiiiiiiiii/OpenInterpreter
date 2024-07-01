@@ -1,0 +1,4 @@
+push 34
+push 35
+add
+dump
