@@ -6,6 +6,10 @@
 #include <iostream>
 #include <fstream>
 
+void printToken(Token t) {
+    printf("TOKEN{%d, %d, %d, %s}\n", t.line, t.col, (int)t.type, t.value.c_str());
+}
+
 std::string readFileContents(std::string path, bool& success) {
     success = true;
     std::ifstream file(path);
@@ -29,5 +33,13 @@ int runInterpreter(std::string source) {
     std::string contents = readFileContents(source, fileReadSuccess);
 
     std::cout << contents << std::endl;
+
+    Lexer *lex = new Lexer(contents);
+
+    for(Token t : lex->tokens) {
+        printToken(t);
+    }
+
+    delete lex;
     return 0;
 }
